@@ -16,8 +16,7 @@ func ParsePort(args []string) (int, error) {
 	if len(args) < 3 {
 		return -1, ErrMissingPort
 	}
-	port := args[2]
-	portNum, err := strconv.ParseInt(port, 10, 64)
+	portNum, err := strconv.ParseInt(args[2], 10, 64)
 	if err != nil {
 		return -1, err
 	}
