@@ -1,15 +1,23 @@
 package cli
 
-import "fmt"
+import (
+	"fmt"
+	"strconv"
+)
 
-const HELP string = "-h"
+const PORT string = "-p"
 
-func ParseArgs(args []string) string {
+func ParseArgs(args []string) (int, error) {
 	option := args[1]
 	switch option {
-	case HELP:
-		return "HELP"
+	case PORT:
+		port := args[2]
+		portNum, err := strconv.ParseInt(port, 10, 64)
+		if err != nil{
+			return -1, err
+		}
+		return int(portNum), nil
 	default:
-		return fmt.Sprintf("%s is not a valid option", option)
+		return -1, fmt.Errorf("%s is not a valid option", option)
 	}
 }
