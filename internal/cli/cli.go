@@ -1,13 +1,21 @@
 package cli
 
 import (
+	"errors"
 	"fmt"
 	"strconv"
 )
 
-const PORT string = "-p"
+var ( 
+	port string = "-p"
+
+	ErrMissingPort error = errors.New("Missing port number expected")
+)
 
 func ParsePort(args []string) (int, error) {
+	if len(args) < 3 {
+		return -1, ErrMissingPort
+	}
 	port := args[2]
 	portNum, err := strconv.ParseInt(port, 10, 64)
 	if err != nil {
@@ -19,7 +27,7 @@ func ParsePort(args []string) (int, error) {
 func ParseArgs(args []string) (int, error) {
 	option := args[1]
 	switch option {
-	case PORT:
+	case port:
 		return ParsePort(args)
 	default:
 		return -1, fmt.Errorf("%s is not a valid option", option)
