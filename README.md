@@ -1,5 +1,5 @@
 # hitman
-CLI program to kill processes given on port number.
+CLI program to kill processes given a port number.
 
 ## Installation
 ```bash
