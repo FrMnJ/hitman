@@ -9,10 +9,9 @@ func TestParseArgs(t *testing.T) {
 	t.Run("invalid option must return error message", func(t *testing.T) {
 		given := []string{"hitman", "-d"}
 		_, err := ParseArgs(given)
-		expected := "-d is not a valid option"
 
-		if err.Error() != expected {
-			t.Errorf("expected %q but got %q, when given %v", expected, err, given)
+		if !errors.Is(err, ErrInvalidOption) {
+			t.Errorf("expected %q but got %q, when given %v", ErrInvalidOption, err, given)
 		}
 	})
 
