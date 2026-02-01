@@ -5,7 +5,6 @@ import "errors"
 const (
 	MaxPort int = 65535
 	MinPort int = 0
-	InvalidPID int = -1
 )
 
 var (
@@ -13,9 +12,9 @@ var (
 	NotImplemented error = errors.New("Not Implemented")
 )
 
-func SpawnProcOnPort(port int) (pid int, err error) {
+func KillProcOnPort(port int) error {
 	if port > MaxPort || port < MinPort {
-		return InvalidPID, ErrInvalidPort
+		return ErrInvalidPort
 	}
-	return InvalidPID, NotImplemented
+	return NotImplemented
 }
